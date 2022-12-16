@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PTCG Deck Simulator</title>
+</head>
+<body>
+    <header>
+        <h1>Pokemon Deck Simulator</h1>
+        <!--TODO: list of options-->
+    </header>
+
+    <section>
+        <button id="createDeck">Make a deck</button>
+        <!--show create deck interface, hide test interface--> 
+        <button id="testDeck">Test a deck</button>
+        <!--show test interface, hide create deck interface--> 
+    </section>
+    <!-- build a deck, save to local storage
+    standard only?
+    search for card, add to array. Limit of 60 cards, 4 of each card except energy -->
+    <section id="create">
+        <h3>Build a deck</h3>
+        <input id="searchCard" placeholder="search for a card">Search</input>
+
+        <!--display search results-->
+        <section>
+            <span>Search Results</span>
+            <ul id="searchResult">
+                <li>test</li>
+            </ul>
+        </section>
+
+        <!--display the current deck in progress-->
+        <section>
+            <span>Current deck:</span>
+            <p id="totalCards">Total Cards: </p>
+            <ul id="buildDeckList">
+                <!--insert card li here-->
+                <li>test</li>
+            </ul>
+        </section>
+
+        
+    </section>
+
+    <!-- test saved deck
+    list of decks by name, select one to use that value in the js methods --> 
+    <section id="test">
+        <h3>Test a deck</h3>
+    </section>
+    <!-- draw a starting hand
+    use chosen deck, shuffle array, 'draw' 7 cards
+    if no basic mons, reshuffle and draw again -->
+
+    <!-- set prizes
+    'draw' 6 more cards -->
+</body>
+</html>
