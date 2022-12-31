@@ -21,7 +21,33 @@
 /* BASE STYLES
 /*******************************************/
 html{
-  font-size: 62.5%;
+
+}
+
+.hidden{
+  display: none;
+}
+img{
+  max-width: 150px;
+}
+
+ul{
+  list-style-type: none;
+}
+
+#buildSearch{
+  width: 65%;
+}
+#currentDeck{
+  width: 35%;
+}
+
+#buildSearch ul{
+  display: flex;
+  flex-wrap: wrap;
+}
+#buildSearch li{
+  padding: 2px;
 }
 /******************************************
 /* LAYOUT

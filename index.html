@@ -5,57 +5,80 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PTCG Deck Simulator</title>
+
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <header>
         <h1>Pokemon Deck Simulator</h1>
-        <!--TODO: list of options-->
     </header>
 
-    <section>
-        <button id="createDeck">Make a deck</button>
+    <section class="hidden"> <!--Tool Selection-->
+        <button id="buildDeck">Make a deck</button>
         <!--show create deck interface, hide test interface--> 
         <button id="testDeck">Test a deck</button>
         <!--show test interface, hide create deck interface--> 
     </section>
-    <!-- build a deck, save to local storage
-    standard only?
-    search for card, add to array. Limit of 60 cards, 4 of each card except energy -->
-    <section id="create">
-        <h3>Build a deck</h3>
-        <input id="searchCard" placeholder="search for a card">Search</input>
+
+
+    <!--DECK BUILDING SECTION-->
+    <section id="build" class="">
+        <section>
+            <h3>Build a deck</h3>
+            <input id="searchCardText" placeholder="search for a card">
+            <button id="searchForCard">Search</button>
+        </section>
 
         <!--display search results-->
-        <section>
+        <section id="buildSearch">
             <span>Search Results</span>
+            <!--card search results inserted here-->
             <ul id="searchResult">
-                <li>test</li>
+                
             </ul>
         </section>
 
         <!--display the current deck in progress-->
-        <section>
+        <section id="currentDeck">
             <span>Current deck:</span>
             <p id="totalCards">Total Cards: </p>
             <ul id="buildDeckList">
                 <!--insert card li here-->
-                <li>test</li>
+                <li>test entry</li>
             </ul>
         </section>
 
-        
-    </section>
+        <input id="deckName" placeholder="Deck Name">
+        <button>Save Deck</button>
 
-    <!-- test saved deck
-    list of decks by name, select one to use that value in the js methods --> 
-    <section id="test">
+    </section>
+    <!--END OF DECK BUILDING-->
+
+
+    <!--DECK SIMULATION SECTION-->
+    <section id="test" class="hidden">
         <h3>Test a deck</h3>
-    </section>
-    <!-- draw a starting hand
-    use chosen deck, shuffle array, 'draw' 7 cards
-    if no basic mons, reshuffle and draw again -->
+        <section>
+            <ul id="savedDeckList">
+                <li>Deck1</li>
+            </ul>
 
-    <!-- set prizes
-    'draw' 6 more cards -->
+            <span>Use this deck?</span>
+            <!--insert clicked deck name-->
+            <button>Test</button>
+        </section>
+
+        <h2>Testing Deck 1</h2> <!--insert deck name-->
+
+        <img src="assets/pkmnCardBack.jpg" alt="CardBack">
+        <button id="drawOpeningHand">Draw!</button>
+
+
+
+
+        <script type="text/javascript" src="js/main.js"></script>
+    </section>
+    
 </body>
 </html>
