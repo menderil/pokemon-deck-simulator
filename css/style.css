@@ -20,10 +20,6 @@
 /******************************************
 /* BASE STYLES
 /*******************************************/
-html{
-
-}
-
 .hidden{
   display: none;
 }
@@ -33,6 +29,10 @@ img{
 
 ul{
   list-style-type: none;
+}
+li{
+  display: flex;
+  flex-direction: column;
 }
 
 #buildSearch{
