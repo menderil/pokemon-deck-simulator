@@ -1,17 +1,18 @@
-//event listener for deck building search button
+//event listeners for buttons
 document.querySelector('#searchForCard').addEventListener('click', searchForCard);
-//deck build search result ul
-const buildSearchResult = document.querySelector('#searchResult');
-
-//event listener for display deck list button
 document.querySelector('#showDeck').addEventListener('click', displayDeckList);
-//display deck ul
+
+//variables for uls in the html
+const buildSearchResult = document.querySelector('#searchResult');
 const displayDeckUl = document.querySelector('#displayDeckList');
+
+//variables for the deck
 const totalCards = document.querySelector('#totalCards');
 let numberOfCards = 0;
-
-//holds the current deck being built
 const currentDeck = [];
+
+//the array result from the current search
+let currentSearch = [];
 
 function searchForCard(){
     //grabs the card name
@@ -20,36 +21,18 @@ function searchForCard(){
     buildSearchInput = `"${buildSearchInput}"`;
     console.log(buildSearchInput);
 
-    //clears previous search results
-    while(buildSearchResult.firstChild ){
-        buildSearchResult.removeChild(buildSearchResult.firstChild );
-    }
+
+    clearUL(buildSearchResult);
 
     fetch(`https://api.pokemontcg.io/v2/cards?q=name:${buildSearchInput}`)
         .then(response => response.json())
         .then(searchResponse => {
+            let currentSearch = searchResponse.data;
             //testing log
-            console.log(searchResponse)
+            console.log(currentSearch)
             
-            //loop through result array
             for(let i = 0; i < searchResponse.data.length; i++){
-                //create li, img, span
-                const li = document.createElement('li');
-                const img = document.createElement('img');
-                const span = document.createElement('span');
-
-                //set img src to search result image
-                img.src = searchResponse.data[i].images.small;
-                //set span text to card ID
-                span.innerText = searchResponse.data[i].id;
-                span.addEventListener('click', addCardToDeck);
-
-                //append items to li element
-                li.appendChild(img);
-                li.appendChild(span);
-
-                //append li the search result list
-                buildSearchResult.appendChild(li);
+                buildSearchResult.appendChild(createCardElements(currentSearch[i]));
             }
         });
 }
@@ -104,10 +87,7 @@ function addCardToDeck(){
 }
 
 function displayDeckList(){
-    //remove previous entries to update quantities
-    while( displayDeckUl.firstChild ){
-        displayDeckUl.removeChild( displayDeckUl.firstChild );
-    }
+    clearUL(displayDeckUl);
 
     //loop through current deck list
     for(let i = 0; i < currentDeck.length; i++){
@@ -121,4 +101,29 @@ function displayDeckList(){
         displayDeckUl.append(li);
     }
     totalCards.innerText = `Total Cards: ${numberOfCards}`;
+}
+
+//this function creates and returns an li element with the card's image and id
+//adds an event listener to the id, allowing it to be added to the deck
+function createCardElements(card){
+    const li = document.createElement('li');
+    const img = document.createElement('img');
+    const id = document.createElement('span');
+
+    img.src = card.images.small;
+    id.innerText = card.id;
+    id.addEventListener('click', addCardToDeck);
+
+    li.appendChild(img);
+    li.appendChild(id);
+
+    return li;
+}
+
+//this function removes any children attached to the passed UL
+//clears out previous search results / allows updated qty for displayed deck list
+function clearUL(list){
+    while(list.firstChild ){
+        list.removeChild(list.firstChild );
+    }
 }
