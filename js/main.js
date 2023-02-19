@@ -59,30 +59,35 @@ function addCardToDeck(){
             if (i > -1 ) {
                 currentDeck[i].addCard();
                 numberOfCards++;
+                displayDeckList()
             }else{
                 currentDeck.push(new Card(cardToAdd.name, cardToAdd.images.small, cardToAdd.id));
                 numberOfCards++;
+                displayDeckList()
             }
         }
     }
 }
 /*
     This function displays the current list of cards in the deck
-    It clears the previous list, if there is one
-    then loops through the deck array, creates an li with the name, id, and quantity of each card
+    It clears the previous list, if there is one,
+    then loops through the deck array, creates an li with the name, id, and quantity of each card,
     then appends the li to the display ul
+    The id added to each li is the index of the element in the currentDeck
 */
 function displayDeckList(){
     clearUL(displayDeckUl);
-    //loop through current deck list
+
     for(let i = 0; i < currentDeck.length; i++){
-        //create the elements to add
         const li = document.createElement('li');
         const span = document.createElement('span');
 
-        //show card name, id, and quantity in deck
-        span.innerText = `Card: ${currentDeck[i].name} ${currentDeck[i].id} x${currentDeck[i].quantity}`;
+        span.innerText = `${currentDeck[i].name} ${currentDeck[i].id} x${currentDeck[i].quantity}`;
         li.append(span);
+        li.setAttribute('id', `${i}A`)
+        //li.addEventListener('click', reduceCards)
+        //TODO
+        //add event listener to use this.removeCard() on click
         displayDeckUl.append(li);
     }
     totalCards.innerText = `Total Cards: ${numberOfCards}`;
@@ -133,5 +138,12 @@ class Card {
         }else{
             alert(`Max quantity of ${this.id} are in the deck`)
         }  
+    }
+
+    //this function removes x cards from the deck
+    //it returns the current quantity
+    removeCard(x){
+        this.quantity = this.quantity - x;
+        return this.quantity;
     }
 }
